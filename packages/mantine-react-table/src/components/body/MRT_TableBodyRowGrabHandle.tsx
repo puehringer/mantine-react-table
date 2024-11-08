@@ -33,12 +33,14 @@ export const MRT_TableBodyRowGrabHandle = <TData extends MRT_RowData>({
   };
 
   const handleDragStart = (event: DragEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
     actionIconProps?.onDragStart?.(event);
     event.dataTransfer.setDragImage(rowRef.current as HTMLElement, 0, 0);
     table.setDraggingRow(row as any);
   };
 
   const handleDragEnd = (event: DragEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
     actionIconProps?.onDragEnd?.(event);
     table.setDraggingRow(null);
     table.setHoveredRow(null);

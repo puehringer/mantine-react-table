@@ -75,11 +75,13 @@ export const MRT_ShowHideColumnsMenuItems = <TData extends MRT_RowData>({
   const [isDragging, setIsDragging] = useState(false);
 
   const handleDragStart = (e: DragEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
     setIsDragging(true);
     e.dataTransfer.setDragImage(menuItemRef.current as HTMLElement, 0, 0);
   };
 
-  const handleDragEnd = (_e: DragEvent<HTMLButtonElement>) => {
+  const handleDragEnd = (e: DragEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
     setIsDragging(false);
     setHoveredColumn(null);
     if (hoveredColumn) {
@@ -87,7 +89,8 @@ export const MRT_ShowHideColumnsMenuItems = <TData extends MRT_RowData>({
     }
   };
 
-  const handleDragEnter = (_e: DragEvent) => {
+  const handleDragEnter = (e: DragEvent) => {
+    e.stopPropagation();
     if (!isDragging && columnDef.enableColumnOrdering !== false) {
       setHoveredColumn(column);
     }

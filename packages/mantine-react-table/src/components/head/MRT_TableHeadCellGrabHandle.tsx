@@ -41,6 +41,7 @@ export const MRT_TableHeadCellGrabHandle = <TData extends MRT_RowData>({
   };
 
   const handleDragStart = (event: DragEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
     actionIconProps?.onDragStart?.(event);
     setDraggingColumn(column);
     event.dataTransfer.setDragImage(
@@ -51,6 +52,7 @@ export const MRT_TableHeadCellGrabHandle = <TData extends MRT_RowData>({
   };
 
   const handleDragEnd = (event: DragEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
     actionIconProps?.onDragEnd?.(event);
     if (hoveredColumn?.id === 'drop-zone') {
       column.toggleGrouping();
